@@ -1,32 +1,12 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
-
-app.use("/listausuarios",(req, res, next)=>{
-
-    res.status(200).send({
-            mensagem: "Lista de Usuarios",
-        })
-
-});
-
-app.use("/listaempresas",(req, res, next)=>{
-   
-        res.status(200).send({
-            mensagem: "Lista de Empresas"     
-        })
-
-});
-
-app.use("/somar",(req,res,next)=>{
-    let a=2;
-    let b=5;
-    let total=0;
-    total=a+b;
-    c+
-        res.status(200).send({
-            resultado:total
-        })
-});
+const rotaUsuario = require('./routes/rotaUsuario');
+const bodyParser = require('body-parser');
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+app.use("/usuario", rotaUsuario);
 
 app.use((req,res,next)=>{
     const erro = new Error("Não encontrado!");
@@ -38,9 +18,9 @@ app.use((error,req,res,next)=>{
     req.status(error.status || 500);
     return res.json({
         erro:{
-            mensagem:mesagem
+            mensagem:error.mensagem
         }
     })
-})
+});
 
 module.exports = app
