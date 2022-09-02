@@ -1,81 +1,96 @@
 const express = require('express');
 const router = express.Router();
-const usuario = [
+const lotacao = [
     {
         "id":1,
-        "nome":"Carlos",
-        "email":"sousamacedo18@gmail.com",
-        "senha":"123"
+        "idemp":1,
+        "idpat":1,
+        "idset":1,
+        "idusu":1,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":2,
-        "nome":"Pedro",
-        "email":"pedro@gmail.com",
-        "senha":"321"
+        "idemp":2,
+        "idpat":2,
+        "idset":2,
+        "idusu":2,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":3,
-        "nome":"João Neto",
-        "email":"joaoneto@gmail.com",
-        "senha":"123"
+        "idemp":3,
+        "idpat":3,
+        "idset":3,
+        "idusu":3,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":4,
-        "nome":"Iarly",
-        "email":"iarly@gmail.com",
-        "senha":"123"
+        "idemp":4,
+        "idpat":4,
+        "idset":4,
+        "idusu":4,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":5,
-        "nome":"Maria Eduarda",
-        "email":"mariaeduarda@gmail.com",
-        "senha":"123"
+        "idemp":5,
+        "idpat":5,
+        "idset":5,
+        "idusu":5,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":6,
-        "nome":"Filipe",
-        "email":"filipe@gmail.com",
-        "senha":"123"
+        "idemp":6,
+        "idpat":6,
+        "idset":6,
+        "idusu":6,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":7,
-        "nome":"Ray",
-        "email":"ray@gmail.com",
-        "senha":"777"
+        "idemp":7,
+        "idpat":7,
+        "idset":7,
+        "idusu":7,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":8,
-        "nome":"Max",
-        "email":"max@gmail.com",
-        "senha":"123"
+        "idemp":8,
+        "idpat":8,
+        "idset":8,
+        "idusu":8,
+        "lotacao" : "2022-08-31"
     },
     {
         "id":9,
-        "nome":"Gabriela",
-        "email":"gabriela@gmail.com",
-        "senha":"123"
+        "idemp":9,
+        "idpat":9,
+        "idset":9,
+        "idusu":9,
+        "lotacao" : "2022-08-31"
     },
     {
-        "id":1000,
-        "nome":"Naiany",
-        "email":"nay@gmail.com",
-        "senha":"7777" 
+        "id":10,
+        "idemp":10,
+        "idpat":10,
+        "idset":10,
+        "idusu":10,
+        "lotacao" : "2022-08-31" 
     }
     
 ] 
-
-function validacaoEmail(email){
-    var re = /\S+@\S+.\S+/;
-    return re.test(email);
-}
 
 //para consultar todos os dados
 
 router.get('/',(req, res, next)=>{
     res.status(200).send(
         {
-            mensagem: "aqui é a lista de usuários!!!",
-            usuario: usuario
+            mensagem: "aqui é a lista de lotações!!!",
+            lotacao: lotacao
         }
     )
         
@@ -85,11 +100,11 @@ router.get('/',(req, res, next)=>{
 
 router.get('/:id',(req, res, next)=>{
     const  id = req.params.id;
-    let listausuario = usuario.filter(value=>value.id==id);
+    let listalotacao = lotacao.filter(value=>value.id==id);
     res.status(200).send(
         {
             mensagem: `aqui é a lista de usuários com id:${id}`,
-            usuario: listausuario
+            lotacao: listalotacao
         }
     )
         
@@ -101,29 +116,15 @@ router.post('/',(req, res, next)=>{
 
     let msg=[];
     let i=0;
-    const usuario={
+    const lotacao={
         nome : req.body.nome,
         email : req.body.email,
         senha : req.body.senha
     }
 
-    if(usuario.nome.lenght<3){
+    if(lotacao.nome.lenght<3){
 
         msg.push({mensagem:"campo com menos de 3 caracteres!"})
-        i++;
-
-    }
-
-    if(validacaoEmail(usuario.email)==false){
-
-        msg.push({mensagem:"Email inválido!"})
-        i++;
-
-    }
-
-    if(usuario.senha.lenght==0){
-
-        msg.push({mensagem:"Senha inválida!"})
         i++;
 
     }
@@ -221,74 +222,3 @@ router.delete('/:id',(req, res, next)=>{
 });
 
 module.exports = router;
-
-
-
-
-
-
-
-// router.post('/',(req, res, next)=>{
-
-//     const usuario={
-//         nome : req.body.nome,
-//         email : req.body.email,
-//         senha : req.body.senha
-//     }
-
-//     if(usuario.nome.length >= 3){
-
-//         res.status(201).send(
-//             {
-//                 mensagem: "Dados Inseridos!!!",
-//                 usuarioCriado: usuario
-//             }
-//         )
-
-//     }else{
-
-//         res.status(400).send(
-//             {
-//                 mensagem: "Campo nome com menos de 3 caracteres!",
-//             }
-//         )
-
-//     }
-
-// }); 
-
-
-
-
-
-
-// router.post('/',(req, res, next)=>{
-
-//     const email = req.email;
-    
-//     const usuario={
-//         nome : req.body.nome,
-//         email : req.body.email,
-//         senha : req.body.senha
-//     }
-
-//     if(validacaoEmail(usuario.email)){
-
-//         res.status(201).send(
-//             {
-//                 mensagem: "Dados Inseridos!!!",
-//                 usuarioCriado: usuario
-//             }
-//         )
-
-//     }else{
-
-//         res.status(400).send(
-//             {
-//                 mensagem: "E-mail invalido!",
-//             }
-//         )
-
-//     }
-
-// }); 
